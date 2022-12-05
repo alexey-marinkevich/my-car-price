@@ -20,8 +20,14 @@ export class UsersController {
     const { email, password } = body;
     this.usersService.create(email, password);
   }
+
   @Get('/:id')
   findUser(@Param('id') id: string) {
     return this.usersService.findOne(parseInt(id));
+  }
+
+  @Get()
+  findByEmail(@Query('email') email: string) {
+    return this.usersService.findByEmail(email);
   }
 }
