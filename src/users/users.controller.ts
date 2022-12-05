@@ -30,4 +30,9 @@ export class UsersController {
   findByEmail(@Query('email') email: string) {
     return this.usersService.findByEmail(email);
   }
+
+  @Delete('/:id')
+  deleteUser(@Param('id') id: string) {
+    return this.usersService.delete(parseInt(id));
+  }
 }
