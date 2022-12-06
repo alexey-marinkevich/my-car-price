@@ -8,7 +8,7 @@ import { CreateUserDto } from './dtos';
 export class AuthService {
   constructor(private usersService: UsersService) {}
 
-  async signup(body: CreateUserDto) {
+  async signUp(body: CreateUserDto) {
     const { email, password } = body;
 
     // check user's existence
@@ -27,7 +27,7 @@ export class AuthService {
     return newUser;
   }
 
-  async signin(body: CreateUserDto) {
+  async signIn(body: CreateUserDto) {
     const { email, password } = body;
 
     // check email's existence
