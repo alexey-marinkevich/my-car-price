@@ -9,10 +9,13 @@ import {
   Query,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from './dtos';
+
 import { UsersService } from './users.service';
+import { CreateUserDto, UpdateUserDto, UserDto } from './dtos';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
