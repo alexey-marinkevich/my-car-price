@@ -32,7 +32,6 @@ export class AuthService {
 
     // check email's existence
     const [user] = await this.usersService.findByEmail(email);
-    console.log(user);
 
     if (!user) {
       throw new BadRequestException('Email or password is incorrect');
