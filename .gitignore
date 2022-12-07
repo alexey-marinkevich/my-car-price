@@ -19,6 +19,10 @@ lerna-debug.log*
 .env.development
 .env.test
 
+# Databases
+db.sqlite
+test.sqlite
+
 # Tests
 /coverage
 /.nyc_output
