@@ -17,6 +17,8 @@ import { CreateUserDto, UpdateUserDto, UserDto } from './dtos';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '../guards/auth.guard';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -43,6 +45,12 @@ export class UsersController {
   @Post('/sign-out')
   signOut(@Session() session: any) {
     session.userId = null;
+  }
+
+  @Get('/about-me')
+  @UseGuards(AuthGuard)
+  aboutMe(@CurrentUser() user: User) {
+    return user;
   }
 
   @Get('/:id')
