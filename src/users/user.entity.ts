@@ -6,6 +6,9 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ default: true }) //todo: change to false
+  admin: boolean;
+
   @Column()
   email: string;
 
