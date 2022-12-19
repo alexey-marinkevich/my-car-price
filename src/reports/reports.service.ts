@@ -30,9 +30,10 @@ export class ReportsService {
     return report;
   }
 
-  createEstimate(estimateDto: GetEstimateDto) {
+  async createEstimate(estimateDto: GetEstimateDto) {
     const { make, model, mileage, year, lat, lng } = estimateDto;
-    return this.repo
+
+    const estimatedPrice = await this.repo
       .createQueryBuilder()
       .select('AVG(price)', 'price')
       .where('make = :make', { make })
@@ -44,5 +45,13 @@ export class ReportsService {
       .orderBy('ABS(mileage - :mileage)', 'DESC')
       .setParameters({ mileage })
       .getRawOne();
+
+    if (!estimatedPrice.price) {
+      throw new NotFoundException(
+        "We don't have enough information in our database to estimate the value of your car just yet.",
+      );
+    }
+
+    return estimatedPrice;
   }
 }
